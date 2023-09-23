@@ -5,27 +5,18 @@
   column-gap: $columnGap;
 }
 
-.filter-price-section {
+.filter-symbols-section {
+  margin-top: 45px;
   h4 {
     font-size: 1rem;
     margin-bottom: 15px;
   }
 
-  .price-inputs {
+  .symbols-inputs {
     @include flex(space-between, center, 15px);
 
-    .price-from {
-      position: relative;
-
-      span {
-        position: absolute;
-        right: 15px;
-        top: 14px;
-        font-size: 14px;
-        color: #92929d;
-      }
-
-      .price-input {
+    .symbols-from {
+      .symbols-input {
         box-sizing: border-box;
         height: 44px;
         background: #ffffff;

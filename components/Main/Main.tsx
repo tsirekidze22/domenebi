@@ -12,7 +12,7 @@ const Main = () => {
 
         <div className="domens-section">
           <Filters />
-          <div className="domain-content">F</div>
+          <div className="domain-content"></div>
         </div>
       </div>
     </main>

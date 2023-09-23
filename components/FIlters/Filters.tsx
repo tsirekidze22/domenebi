@@ -2,6 +2,8 @@ import React from "react";
 
 import "./Filters.scss";
 import PriceFilterSlider from "../PriceFilterSlider/PriceFilterSlider";
+import SymbolsFilterSlider from "../SymbolsFilterSlider/SymbolsFilterSlider";
+import CategoriesFilter from "../CategoriesFilter/CategoriesFilter";
 
 const Filters = () => {
   return (
@@ -16,7 +18,9 @@ const Filters = () => {
           className="search-by-name"
           placeholder="სახელით ძიება"
         />
-        <PriceFilterSlider/>
+        <PriceFilterSlider />
+        <SymbolsFilterSlider />
+        <CategoriesFilter />
       </div>
     </div>
   );
