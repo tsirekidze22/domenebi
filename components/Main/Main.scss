@@ -1,0 +1,52 @@
+@mixin flex($justifyContent, $alignItems, $columnGap: 0px) {
+  display: flex;
+  align-items: $alignItems;
+  justify-content: $justifyContent;
+  column-gap: $columnGap;
+}
+
+.main {
+  width: 100%;
+  background: #fafafb;
+  min-height: 500px;
+
+  .main-content {
+    max-width: 1286px;
+    width: 100%;
+    margin: 0 auto;
+    padding-top: 30px;
+  }
+}
+
+.banner {
+  width: 1286px;
+  height: 180px;
+  background-image: url("../../public/assets/banner.png");
+  background-size: contain;
+  background-color: #0000004d;
+  border-radius: 15px;
+  background-repeat: no-repeat;
+  position: relative;
+  @include flex(center, center);
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1286px;
+    height: 180px;
+    border-radius: 15px;
+    background: #0000004d;
+  }
+
+  .banner-title {
+    height: 48px;
+    color: #fff;
+    letter-spacing: 2px;
+    word-spacing: 3px;
+    font-family: "TKT-Regular", Arial;
+    display: inline-block;
+    z-index: 10;
+  }
+}
