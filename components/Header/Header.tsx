@@ -1,21 +1,39 @@
+"use client";
 import Image from "next/image";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 
 import "./Header.scss";
+import Cart from "../Cart/Cart";
 
 const Header = () => {
+  const cart = useSelector((state: any) => state.cart);
+  const [isCartShown, setIsCartShown] = useState(false);
+
+  const cartShowerHandler = () => {
+    setIsCartShown(false)
+  }
   return (
     <header className="header">
       <div className="top-header-wrapper">
         <div className="header-top">
-          <a href="/" className="logo"><Image src="/assets/Logo.svg" width={183} height={31} alt="Logo" /></a>
+          <a href="/" className="logo">
+            <Image src="/assets/Logo.svg" width={183} height={31} alt="Logo" />
+          </a>
           <div className="header-btns">
             <div className="bell-btn header-btn">
               <Image src="/assets/Bell.svg" width={17} height={20} alt="Bell" />
             </div>
             <div className="cart-btn header-btn">
-              <Image src="/assets/Cart.svg" width={22} height={19} alt="Cart" />
+              <Image
+                src="/assets/Cart.svg"
+                width={22}
+                height={19}
+                alt="Cart"
+                onClick={() => setIsCartShown((prev) => !prev)}
+              />
               <div className="cart-number">
-                <span>3</span>
+                <span>{cart.length}</span>
               </div>
             </div>
             <div className="profile-btn header-btn">
@@ -105,6 +123,7 @@ const Header = () => {
           </ul>
         </nav>
       </div>
+      {isCartShown && <Cart cartShowerHandler={cartShowerHandler}/>}
     </header>
   );
 };

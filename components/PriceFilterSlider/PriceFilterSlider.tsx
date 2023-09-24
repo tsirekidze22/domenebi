@@ -1,13 +1,18 @@
 "use client";
 import React, { useState } from "react";
 import ReactSlider from "react-slider";
+import { useDispatch, useSelector } from "react-redux";
+import { setPriceRange } from "../../store/priceFilterSlice";
+
 import "./PriceFilterSlider.scss";
 
 const PriceFilterSlider = () => {
   const [sliderValues, setSliderValues] = useState([0, 50000]);
+  const dispatch = useDispatch();
 
   const handleSliderChange = (newValues: any) => {
     setSliderValues(newValues);
+    dispatch(setPriceRange(newValues));
   };
 
   const handleInputChange = (e: any, inputIndex: any) => {

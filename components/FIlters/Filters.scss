@@ -15,7 +15,8 @@
     height: 21px;
     font-weight: 500;
     font-family: "TKT-Medium", Arial;
-
+    margin-top: 0px;
+    margin-bottom: 28px;
     span {
       color: #171d25;
     }
@@ -36,7 +37,7 @@
       width: 100%;
       height: 60px;
       padding-left: 20px;
+      outline: none;
     }
-
   }
 }

@@ -1,20 +1,25 @@
 "use client";
 import React, { useState } from "react";
 import ReactSlider from "react-slider";
-import "./SymbolsFilterSlider.scss"
+import "./SymbolsFilterSlider.scss";
+import { useDispatch } from "react-redux";
+import { setSymbolRange } from "../../store/symbolsSlice";
 
 const SymbolsFilterSlider = () => {
-    const [sliderValues, setSliderValues] = useState([0, 26]);
+  const dispatch = useDispatch();
+  const [sliderValues, setSliderValues] = useState([0, 26]);
 
   const handleSliderChange = (newValues: any) => {
     setSliderValues(newValues);
+    dispatch(setSymbolRange(newValues));
   };
 
-  const handleInputChange = (e: any, inputIndex: any) => {
+  const handleInputChange = (e, inputIndex: any) => {
     const newValue = parseInt(e.target.value) || 0;
     const newSliderValues = [...sliderValues];
     newSliderValues[inputIndex] = newValue;
     setSliderValues(newSliderValues);
+    dispatch(setSymbolRange(newSliderValues));
   };
   return (
     <div className="filter-symbols-section">
@@ -55,7 +60,7 @@ const SymbolsFilterSlider = () => {
         />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default SymbolsFilterSlider
+export default SymbolsFilterSlider;

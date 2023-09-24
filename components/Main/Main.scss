@@ -15,6 +15,92 @@
     width: 100%;
     margin: 0 auto;
     padding-top: 30px;
+
+    .domains-section {
+      @include flex(space-between, start, 40px);
+      padding-top: 40px;
+
+      .domain-content {
+        width: 100%;
+
+        .domains-content-header {
+          @include flex(space-between, center);
+
+          .domains-sort-section {
+            @include flex(start, center, 18px);
+          }
+        }
+
+        .domains-list {
+          margin-top: 28px;
+          background: #ffffff;
+          border: 1px solid #f1f1f5;
+          border-radius: 15px;
+          min-height: 100px;
+          padding: 10px 40px 30px 40px;
+          list-style-type: none;
+
+          .domain-item {
+            min-height: 36px;
+            width: 100%;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #f1f1f5;
+            margin-top: 20px;
+            @include flex(space-between, center);
+
+            .domain-name {
+              @include flex(start, center, 20px);
+
+              .arrow-down {
+                cursor: pointer;
+              }
+              span {
+                color: #171d25;
+                font-size: 16px;
+                font-family: "TKT-Medium", Arial;
+              }
+            }
+
+            .domain-price {
+              @include flex(start, center, 20px);
+
+              .in-cart {
+                width: 125px;
+                @include flex(center, center, 6px);
+                height: 36px;
+                background: #f5f5f8;
+                border-radius: 10px;
+
+                span {
+                  color: #696974;
+                  font-size: 14px;
+                }
+              }
+              span {
+                color: #171d25;
+                font-size: 16px;
+                font-family: "TKT-Medium", Arial;
+              }
+
+              h5 {
+                font-size: 12px;
+                color: #696974;
+                margin: 0;
+                @include flex(end, center, 20px);
+              }
+              .cart {
+                width: 36px;
+                height: 36px;
+                background: #99cc66;
+                border-radius: 10px;
+                @include flex(center, center);
+                cursor: pointer;
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }
 
