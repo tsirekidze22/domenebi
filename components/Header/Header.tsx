@@ -152,7 +152,8 @@ const Header = () => {
           <Image src="/assets/Bell.svg" width={16} height={19} alt="Bell" />
           <div
             className="cart-btn header-btn"
-            onClick={() => setIsCartShown((prev) => !prev)}>
+            onClick={() => setIsCartShown((prev) => !prev)}
+          >
             <Image src="/assets/Cart.svg" width={22} height={19} alt="Cart" />
 
             <div className="cart-number">
@@ -166,6 +167,7 @@ const Header = () => {
             alt="profile"
           />
         </div>
+        {isCartShown && <Cart cartShowerHandler={cartShowerHandler} />}
       </header>
     </>
   );
