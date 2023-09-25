@@ -1,7 +1,7 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Image from "next/image";
-
+import { removeFromCart } from "../../store/cartSlice";
 import "./Cart.scss";
 
 type Props = {
@@ -10,7 +10,11 @@ type Props = {
 
 const Cart: React.FC<Props> = ({ cartShowerHandler }) => {
   const cart = useSelector((state: any) => state.cart);
+  const dispatch = useDispatch(); // Add useDispatch hook
 
+  const handleRemoveFromCart = (domainName: string) => {
+    dispatch(removeFromCart(domainName));
+  };
   console.log(cart);
   return (
     <div className="cart-modal">
@@ -24,27 +28,53 @@ const Cart: React.FC<Props> = ({ cartShowerHandler }) => {
             onClick={cartShowerHandler}
           />
         </div>
-        {cart.map((domain: any) => (
-          <li className="domain-item" key={domain.domainName}>
-            <div className="domain-name">
-              <Image
-                src={"/assets/ArrowDown.svg"}
-                width={36}
-                height={36}
-                alt="arrow down"
-                className="arrow-down"
-              />
-              <span>{domain.domainName}</span>
-            </div>
 
-            <div className="domain-price">
-              <div>
-                <span>{domain.price}</span>
-                <h5>{(domain.price / 3).toFixed(1)}</h5>
-              </div>
+        {cart.length === 0 ? (
+          <div className="no-result">
+            <Image
+              src={"/assets/NoResult.svg"}
+              width={195}
+              height={168}
+              alt="no result"
+            />
+            <div className="no-result-text">
+              <h3 className="title">კალათა ცარიელია</h3>
             </div>
-          </li>
-        ))}
+          </div>
+        ) : (
+          <>
+            {cart.map((domain: any) => (
+              <li className="domain-item" key={domain.domainName}>
+                <div className="domain-name">
+                  <Image
+                    src={"/assets/ArrowDown.svg"}
+                    width={36}
+                    height={36}
+                    alt="arrow down"
+                    className="arrow-down"
+                  />
+                  <span>{domain.domainName}</span>
+                </div>
+
+                <div className="domain-price">
+                  <div>
+                    <span>{domain.price} ₾</span>
+                    <h5>{(domain.price / 2.6).toFixed(1)} $</h5>
+                  </div>
+                </div>
+
+                <Image
+                  src={"/assets/Delete.svg"}
+                  width={24}
+                  height={24}
+                  alt="Delete"
+                  className="delete-btn"
+                  onClick={() => handleRemoveFromCart(domain.domainName)}
+                />
+              </li>
+            ))}
+          </>
+        )}
       </ul>
     </div>
   );

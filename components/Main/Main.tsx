@@ -5,9 +5,8 @@ import Image from "next/image";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../store/cartSlice";
 import { useSelector } from "react-redux";
-//import { setPriceRange } from "../../store/filterSlice";
-import { setSearchText } from "../../store/searchSlice"; // Import the setSearchText action
-import { setSymbolRange } from "../../store/symbolsSlice"; // Import the setSymbolRange action
+import { setSearchText } from "../../store/searchSlice";
+import { setSymbolRange } from "../../store/symbolsSlice";
 
 const domainsArr = [
   {
@@ -98,81 +97,194 @@ const Main = () => {
         selectedSuffixes.includes(domain.domainSuffix))
   );
   return (
-    <main className="main">
-      <div className="main-content">
-        <div className="banner">
-          <h1 className="banner-title">გაყიდე და იყიდე დომენი მარტივად</h1>
-        </div>
+    <>
+      <main className="main">
+        <div className="main-content">
+          <div className="banner">
+            <h1 className="banner-title">გაყიდე და იყიდე დომენი მარტივად</h1>
+          </div>
 
-        <div className="domains-section">
-          <Filters />
-          <div className="domain-content">
-            <div className="domains-content-header">
-              <div className="domains-sort-section">
-                <span>სორტირება</span>
-                <div className="sort-by-date">დამატების თარიღით</div>
-                <div className="sort-by-expiration">ვადის ამოწურვით</div>
-                <div className="sort-by-price">ფასით</div>
-                <div className="sort-by-alphabet">ანბანით</div>
+          <div className="domains-section">
+            <Filters />
+            <div className="domain-content">
+              <div className="domains-content-header">
+                <div className="domains-sort-section">
+                  <span>სორტირება:</span>
+                  <div className="sort-by-date">დამატების თარიღით</div>
+                  <div className="sort-by-expiration">ვადის ამოწურვით</div>
+                  <div className="sort-by-price">ფასით</div>
+                  <div className="sort-by-alphabet">ანბანით</div>
+                </div>
+                <a href="#" className="how-to-sell">
+                  როგორ გავყიდოთ დომენი?
+                </a>
               </div>
-              <a href="#" className="how-to-sell">
-                როგორ გავყიდოთ დომენი?
-              </a>
-            </div>
-            <ul className="domains-list">
-              {filteredDomains.map((domain) => (
-                <li className="domain-item" key={domain.domainName}>
-                  <div className="domain-name">
-                    <Image
-                      src={"/assets/ArrowDown.svg"}
-                      width={36}
-                      height={36}
-                      alt="arrow down"
-                      className="arrow-down"
-                    />
-                    <span>{domain.domainName}</span>
-                  </div>
-
-                  <div className="domain-price">
-                    {cart.some(
-                      (item: any) => item.domainName === domain.domainName
-                    ) ? (
-                      <div className="in-cart">
+              {filteredDomains.length > 0 ? (
+                <ul className="domains-list">
+                  {filteredDomains.map((domain) => (
+                    <li className="domain-item" key={domain.domainName}>
+                      <div className="domain-name">
                         <Image
-                          src={"/assets/RoundedChecked.svg"}
-                          width={18}
-                          height={18}
-                          alt="checked"
+                          src={"/assets/ArrowDown.svg"}
+                          width={36}
+                          height={36}
+                          alt="arrow down"
+                          className="arrow-down"
                         />
-                        <span>კალათაშია</span>
+                        <span>{domain.domainName}</span>
                       </div>
-                    ) : (
-                      <>
-                        <div>
-                          <span>{domain.price}</span>
-                          <h5>{(domain.price / 3).toFixed(1)}</h5>
-                        </div>
-                        <div
-                          className="cart"
-                          onClick={() => handleAddToCart(domain)}
-                        >
-                          <Image
-                            src={"/assets/CartWhite.svg"}
-                            width={20}
-                            height={17}
-                            alt="cart"
-                          />
-                        </div>
-                      </>
-                    )}
+
+                      <div className="domain-price">
+                        {cart.some(
+                          (item: any) => item.domainName === domain.domainName
+                        ) ? (
+                          <div className="in-cart">
+                            <Image
+                              src={"/assets/RoundedChecked.svg"}
+                              width={18}
+                              height={18}
+                              alt="checked"
+                            />
+                            <span>კალათაშია</span>
+                          </div>
+                        ) : (
+                          <>
+                            <div>
+                              <span>{domain.price} ₾</span>
+                              <h5>{(domain.price / 2.6).toFixed(1)} $</h5>
+                            </div>
+                            <div
+                              className="cart"
+                              onClick={() => handleAddToCart(domain)}
+                            >
+                              <Image
+                                src={"/assets/CartWhite.svg"}
+                                width={20}
+                                height={17}
+                                alt="cart"
+                              />
+                            </div>
+                          </>
+                        )}
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <div className="no-result">
+                  <Image
+                    src={"/assets/NoResult.svg"}
+                    width={195}
+                    height={168}
+                    alt="no result"
+                  />
+                  <div className="no-result-text">
+                    <h3 className="title">დომენი ვერ მოძებნა</h3>
+                    <p className="description">
+                      მითითებული პარამეტრებით დომენების მარკეტში შედეგები ვერ
+                      მოიძებნა, შეცვალეთ ძიების პარამეტრები და ცადეთ თავიდან
+                    </p>
                   </div>
-                </li>
-              ))}
-            </ul>
+                </div>
+              )}
+            </div>
           </div>
         </div>
-      </div>
-    </main>
+      </main>
+      <main className="main-mobile">
+        <div className="main-content">
+          <div className="banner">
+            <h1 className="banner-title">გაყიდე და იყიდე დომენი მარტივად</h1>
+          </div>
+
+          <div className="domains-section">
+            {/*<Filters />*/}
+            <div className="domain-content">
+              {/*<div className="domains-content-header">
+                <div className="domains-sort-section">
+                  <span>სორტირება:</span>
+                  <div className="sort-by-date">დამატების თარიღით</div>
+                  <div className="sort-by-expiration">ვადის ამოწურვით</div>
+                  <div className="sort-by-price">ფასით</div>
+                  <div className="sort-by-alphabet">ანბანით</div>
+                </div>
+                <a href="#" className="how-to-sell">
+                  როგორ გავყიდოთ დომენი?
+                </a>
+              </div>*/}
+              {filteredDomains.length > 0 ? (
+                <ul className="domains-list">
+                  {filteredDomains.map((domain) => (
+                    <li className="domain-item" key={domain.domainName}>
+                      <div className="domain-name">
+                        <Image
+                          src={"/assets/ArrowDown.svg"}
+                          width={36}
+                          height={36}
+                          alt="arrow down"
+                          className="arrow-down"
+                        />
+                        <span>{domain.domainName}</span>
+                      </div>
+
+                      <div className="domain-price">
+                        {cart.some(
+                          (item: any) => item.domainName === domain.domainName
+                        ) ? (
+                          <div className="in-cart">
+                            <Image
+                              src={"/assets/RoundedChecked.svg"}
+                              width={18}
+                              height={18}
+                              alt="checked"
+                            />
+                            <span>კალათაშია</span>
+                          </div>
+                        ) : (
+                          <>
+                            <div>
+                              <span>{domain.price} ₾</span>
+                              <h5>{(domain.price / 2.6).toFixed(1)} $</h5>
+                            </div>
+                            <div
+                              className="cart"
+                              onClick={() => handleAddToCart(domain)}
+                            >
+                              <Image
+                                src={"/assets/CartWhite.svg"}
+                                width={20}
+                                height={17}
+                                alt="cart"
+                              />
+                            </div>
+                          </>
+                        )}
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <div className="no-result">
+                  <Image
+                    src={"/assets/NoResult.svg"}
+                    width={195}
+                    height={168}
+                    alt="no result"
+                  />
+                  <div className="no-result-text">
+                    <h3 className="title">დომენი ვერ მოძებნა</h3>
+                    <p className="description">
+                      მითითებული პარამეტრებით დომენების მარკეტში შედეგები ვერ
+                      მოიძებნა, შეცვალეთ ძიების პარამეტრები და ცადეთ თავიდან
+                    </p>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </main>
+    </>
   );
 };
 
