@@ -14,7 +14,7 @@ const SymbolsFilterSlider = () => {
     dispatch(setSymbolRange(newValues));
   };
 
-  const handleInputChange = (e, inputIndex: any) => {
+  const handleInputChange = (e: any, inputIndex: any) => {
     const newValue = parseInt(e.target.value) || 0;
     const newSliderValues = [...sliderValues];
     newSliderValues[inputIndex] = newValue;
