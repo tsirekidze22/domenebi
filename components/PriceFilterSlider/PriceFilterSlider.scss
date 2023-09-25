@@ -41,7 +41,6 @@
           margin: 0;
         }
 
-        /* Firefox */
         &[type="number"] {
           -moz-appearance: textfield;
         }
@@ -55,8 +54,8 @@
     .horizontal-slider {
       width: 100%;
       margin: 0 auto;
-      height: 2px; /* Adjust height as needed */
-      background-color: #ccc; /* Track background color */
+      height: 2px; 
+      background-color: #ccc;
     }
 
     .example-thumb {

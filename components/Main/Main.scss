@@ -63,6 +63,9 @@
             border-bottom: 1px solid #f1f1f5;
             margin-top: 20px;
             @include flex(space-between, center);
+            &:last-child {
+              border-bottom: none;
+            }
 
             .domain-name {
               @include flex(start, center, 20px);
@@ -189,12 +192,32 @@
   }
   .main-mobile {
     display: block;
+    background-color: #fafafb;
 
+    .domains-content-header {
+      padding: 20px;
+      @include flex(space-between, center, 15px);
+
+      .sort-by-alphabet {
+        width: 160px;
+        padding: 11px 13px;
+        background: #ffffff;
+        border: 1px solid #e5e5ed;
+        border-radius: 10px;
+        @include flex(space-between, center);
+        cursor: pointer;
+        span {
+          color: #696974;
+          font-size: 14px;
+        }
+      }
+    }
     .domains-list {
       background: #ffffff;
       min-height: 100px;
-      padding: 4px 20px 30px 20px;
+      padding: 24px 20px 30px 20px;
       list-style-type: none;
+      margin-top: 0px;
 
       .domain-item {
         min-height: 36px;
@@ -203,6 +226,14 @@
         border-bottom: 1px solid #f1f1f5;
         margin-top: 20px;
         @include flex(space-between, center);
+
+        &:first-child {
+          margin-top: 0px;
+        }
+
+        &:last-child {
+          border-bottom: none;
+        }
 
         .domain-name {
           @include flex(start, center, 20px);

@@ -142,8 +142,8 @@ const Header = () => {
         <div className="header-left">
           <Image
             src="/assets/BurgerMenu.svg"
-            width={16}
-            height={14}
+            width={19}
+            height={16}
             alt="BurgerMenu"
           />
           <Image src="/assets/Logo.svg" width={122} height={21} alt="Logo" />

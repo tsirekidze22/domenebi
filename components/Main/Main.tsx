@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Main.scss";
 import Filters from "../FIlters/Filters";
 import Image from "next/image";
@@ -22,7 +22,7 @@ const domainsArr = [
     category: "უძრავი ქონება",
   },
   {
-    domainName: "Auto.net.ge",
+    domainName: "Caru.net.ge",
     price: 30000,
     domainSuffix: ".net.ge",
     category: "ავტო",
@@ -52,7 +52,7 @@ const domainsArr = [
     category: "მედია",
   },
   {
-    domainName: "GreenSchool.school.ge",
+    domainName: "MySchool.school.ge",
     price: 30000,
     domainSuffix: ".school.ge",
     category: "განათლება",
@@ -61,6 +61,7 @@ const domainsArr = [
 
 const Main = () => {
   const dispatch = useDispatch();
+  const [isFilterShown, setIsFilterShown] = useState(false);
   const cart = useSelector((state: any) => state.cart);
   const filter = useSelector((state: any) => state.filter);
   const search = useSelector((state: any) => state.search);
@@ -105,7 +106,7 @@ const Main = () => {
           </div>
 
           <div className="domains-section">
-            <Filters />
+            <Filters AvailableDomains={domainsArr.length} />
             <div className="domain-content">
               <div className="domains-content-header">
                 <div className="domains-sort-section">
@@ -198,20 +199,32 @@ const Main = () => {
           </div>
 
           <div className="domains-section">
-            {/*<Filters />*/}
             <div className="domain-content">
-              {/*<div className="domains-content-header">
-                <div className="domains-sort-section">
-                  <span>სორტირება:</span>
-                  <div className="sort-by-date">დამატების თარიღით</div>
-                  <div className="sort-by-expiration">ვადის ამოწურვით</div>
-                  <div className="sort-by-price">ფასით</div>
-                  <div className="sort-by-alphabet">ანბანით</div>
+              <div className="domains-content-header">
+                <div
+                  className="sort-by-alphabet"
+                  onClick={() => setIsFilterShown(true)}
+                >
+                  <span>ფილტრი</span>
+                  <Image
+                    src={"/assets/DropDownIcon.svg"}
+                    width={10}
+                    height={6}
+                    alt="arrow down"
+                    className="arrow-down"
+                  />
                 </div>
-                <a href="#" className="how-to-sell">
-                  როგორ გავყიდოთ დომენი?
-                </a>
-              </div>*/}
+                <div className="sort-by-alphabet">
+                  <span>სორტირება</span>
+                  <Image
+                    src={"/assets/DropDownIcon.svg"}
+                    width={10}
+                    height={6}
+                    alt="arrow down"
+                    className="arrow-down"
+                  />
+                </div>
+              </div>
               {filteredDomains.length > 0 ? (
                 <ul className="domains-list">
                   {filteredDomains.map((domain) => (
@@ -284,6 +297,9 @@ const Main = () => {
           </div>
         </div>
       </main>
+      {isFilterShown && (
+        <Filters FiltersShowerHandler={() => setIsFilterShown(false)} />
+      )}
     </>
   );
 };
